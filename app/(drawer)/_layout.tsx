@@ -53,6 +53,7 @@ export default function DrawerLayout() {
       <Drawer
         drawerContent={CustomDrawer}
         screenOptions={{
+          //headerShown: false,
           overlayColor: "rgba(0,0,0,0.4)",
           drawerActiveTintColor: "indigo",
           headerShadowVisible: false,
@@ -67,7 +68,7 @@ export default function DrawerLayout() {
           name="(tabs)" // This is the name of the page and must match the url from root
           options={{
             title: "Home",
-            headerShown: true,
+            headerShown: false,
           }}
         />
         <Drawer.Screen
@@ -75,7 +76,7 @@ export default function DrawerLayout() {
           options={{
             drawerLabel: "Settings",
             title: "Settings",
-            headerShown: true,
+            //headerShown: true,
           }}
         />
       </Drawer>

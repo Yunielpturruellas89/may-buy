@@ -6,7 +6,7 @@ const LoginPage = () => {
   const router = useRouter();
   const handlePress = () => {
     //router.replace("/home");
-    router.replace("/(drawer)/(tabs)");
+    router.replace("/(drawer)/(tabs)/(stack)/home");
   };
   return (
     <View
