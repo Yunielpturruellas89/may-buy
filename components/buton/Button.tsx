@@ -32,14 +32,9 @@ const Button: React.FC<IButton> = ({
   disabled = false,
   isFetching = false,
   textTransform = "uppercase",
-  lightColor,
-  darkColor,
 }) => {
-  const backgroundColor = useThemeColor(
-    { light: lightColor, dark: darkColor },
-    "primary"
-  );
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
+  const backgroundColor = useThemeColor({}, "primary");
+  const color = useThemeColor({}, "text");
 
   return (
     <TouchableOpacity

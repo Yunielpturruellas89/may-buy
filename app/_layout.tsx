@@ -12,6 +12,7 @@ import "react-native-reanimated";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { Button } from "react-native";
+import { Colors } from "@/constants/Colors";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -38,10 +39,10 @@ export default function RootLayout() {
       <Stack
         screenOptions={{
           headerStyle: {
-            backgroundColor: "#10101E",
+            backgroundColor: Colors.light.primary,
           },
           headerTintColor: "#fff",
-          headerTitleStyle: { fontWeight: "bold" },
+          //headerTitleStyle: { fontWeight: "bold" },
         }}
       >
         <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
@@ -50,17 +51,21 @@ export default function RootLayout() {
           options={{ headerTitle: "Login", headerShown: false }}
         />
         <Stack.Screen
-          name="register"
+          name="(auth)/login"
+          options={{ headerTitle: "Iniciar sesion" }}
+        />
+        <Stack.Screen
+          name="(auth)/register"
           options={{
             headerTitle: "Create Account",
-            headerRight: () => (
+            /* headerRight: () => (
               <Button
                 title="Open"
                 onPress={() => {
                   router.push("/modal");
                 }}
               />
-            ),
+            ), */
           }}
         />
         <Stack.Screen

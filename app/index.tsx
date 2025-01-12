@@ -1,43 +1,17 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { Controller, useForm } from "react-hook-form";
 
-import React, { useState } from "react";
+import React from "react";
 import { Link, useRouter } from "expo-router";
-import { validateEmail } from "@/utils/validation";
-import TextInputController from "@/components/input/TextInputController";
-import { globals } from "@/styles/global";
-import { Mail, Password, PasswordClose } from "@/theme/icons";
-import { IconSymbol } from "@/components/ui/IconSymbol";
-import Layout from "@/utils/Layout";
 import { ThemedView } from "@/components/ThemedView";
-import { Colors } from "@/constants/Colors";
-import { ThemedButton } from "@/components/ThemedButton";
 import Button from "@/components/buton/Button";
-import { TextInput } from "react-native-paper";
 import { ThemedText } from "@/components/ThemedText";
+import Layout from "@/utils/Layout";
+import { Colors } from "@/constants/Colors";
 const { width, height } = Layout.window;
 
-const LoginPage = () => {
+const WelcomePage = () => {
   const router = useRouter();
 
-  const [showPassword, setShowPassword] = useState(false);
-  const defaultValues = {
-    email: "",
-    password: "",
-  };
-  const {
-    handleSubmit,
-    control,
-    setFocus,
-    formState: { isSubmitting, isValid, isDirty },
-  } = useForm({
-    defaultValues,
-  });
-
-  const onSubmit = async (data: any) => {
-    const loginData = { email: data.email, password: data.password };
-    console.log(loginData);
-  };
   const handlePress = () => {
     //router.replace("/home");
     console.log("first");
@@ -69,103 +43,62 @@ const LoginPage = () => {
         }}
       />
 
-      <ThemedView style={styles.formContainer}>
-        <TextInputController
-          controller={{
-            name: "email",
-            rules: {
-              required: {
-                value: true,
-                message: "Correo electrónico requerido",
-              },
-              validate: { validateEmail },
-            },
-            control: control as any,
-          }}
-          placeholder="Correo electr&oacute;nico"
-          dense
-          autoCapitalize={"none"}
-          keyboardType="email-address"
-          returnKeyType="next"
-          right={<TextInput.Icon icon={"account"} />}
-        />
-        <TextInputController
-          controller={{
-            name: "password",
-            control: control as any,
-            rules: {
-              required: {
-                value: true,
-                message: "Contraseña requerida",
-              },
-            },
-          }}
-          // style={globals.input}
-          //contentStyle={[globals.contentStyleInput]}
-          placeholder="Contrase&ntilde;a"
-          dense
-          secureTextEntry={showPassword ? false : true}
-          returnKeyType="done"
-          onSubmitEditing={() => handleSubmit(onSubmit)()}
-          right={
-            <TextInput.Icon
-              icon={showPassword ? "eye" : "eye-off"}
-              onPress={() => setShowPassword(!showPassword)}
-            />
-          }
-        />
-        <ThemedView style={{ alignSelf: "center" }}>
-          {/* <ThemedButton title="ini" onPress={handlePress} /> */}
-          <Button onPress={handleSubmit(onSubmit)} text="Iniciar" />
-        </ThemedView>
+      <ThemedView style={styles.dividerContainer}>
+        <View style={styles.divider} />
+        <ThemedText style={styles.dividerText}>o</ThemedText>
+        <View style={styles.divider} />
       </ThemedView>
-      <Link href={"/register"} asChild>
-        <Pressable>
-          <Text>Enter to app</Text>
-        </Pressable>
-      </Link>
+
+      <Button
+        text="Crear cuenta"
+        onPress={() => router.push("/register")}
+        styleButton={{
+          marginBottom: 20,
+          width: "90%",
+        }}
+        styleText={{ color: "white", fontWeight: "500" }}
+      />
+
+      <ThemedView style={styles.termsContainer}>
+        <ThemedText style={styles.termsText}>
+          Al registrarte, aceptas nuestros{" "}
+          <Text style={styles.linkText} onPress={() => router.push("/terms")}>
+            Términos y Condiciones
+          </Text>{" "}
+          y{" "}
+          <Text style={styles.linkText} onPress={() => router.push("/privacy")}>
+            Política de Privacidad
+          </Text>
+        </ThemedText>
+      </ThemedView>
+      <ThemedView style={{ flexDirection: "row", marginTop: 30 }}>
+        <ThemedText style={{ marginEnd: 5 }}>Tienes cuenta?</ThemedText>
+        <ThemedText
+          onPress={() => router.push("/(auth)/login")}
+          style={{
+            marginEnd: 5,
+            color: Colors.light.primary,
+          }}
+        >
+          Iniciar sesión
+        </ThemedText>
+      </ThemedView>
     </ThemedView>
   );
 };
 
-/* <Button
-            onPress={handlePress}
-            style={{
-              borderRadius: 100,
-              justifyContent: "center",
-              width: "100%",
-              marginTop: 5,
-              //marginTop: 20,
-              alignSelf: "center",
-            }}
-            contentStyle={{
-              //height: height * 0.065,
-              // justifyContent: "center",
-              // alignContent: "center",
-              alignItems: "center",
-            }}
-            buttonColor={Colors.light.tint}
-            rippleColor={Colors.light.icon}
-          >
-            Iniciar sesión
-          </Button> */
-
-export default LoginPage;
+export default WelcomePage;
 
 export const styles = StyleSheet.create({
   logo: {
     width: width - 150,
     height: width - 100,
-    // marginTop: 350,
     alignSelf: "center",
-    // backgroundColor: "pink",
   },
 
   formContainer: {
-    //paddingVertical: 20,
     alignItems: "flex-start",
     justifyContent: "center",
-    //backgroundColor: "red",
     width: "90%",
   },
 
@@ -175,5 +108,36 @@ export const styles = StyleSheet.create({
     marginBottom: 40,
     paddingHorizontal: 30,
     fontWeight: "bold",
+  },
+
+  termsContainer: {
+    //position: "absolute",
+    // bottom: 20,
+    paddingHorizontal: 30,
+  },
+  termsText: {
+    fontSize: 12,
+    textAlign: "center",
+  },
+  linkText: {
+    color: Colors.light.primary,
+
+    textDecorationLine: "underline",
+  },
+
+  dividerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "80%",
+    marginBottom: 0,
+  },
+  divider: {
+    flex: 1,
+    height: 1,
+    backgroundColor: "#E0E0E0",
+  },
+  dividerText: {
+    marginHorizontal: 10,
+    color: "#666",
   },
 });
