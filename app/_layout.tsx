@@ -27,6 +27,7 @@ export default function RootLayout() {
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
+      router.replace("/(auth)");
     }
   }, [loaded]);
 
@@ -46,42 +47,22 @@ export default function RootLayout() {
         }}
       >
         <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
-        <Stack.Screen
-          name="index"
-          options={{ headerTitle: "Login", headerShown: false }}
-        />
-        <Stack.Screen
-          name="(auth)/login"
-          options={{ headerTitle: "Iniciar sesion" }}
-        />
-        <Stack.Screen
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+
+        {/* <Stack.Screen
           name="(auth)/register"
           options={{
             headerTitle: "Create Account",
-            /* headerRight: () => (
+            headerRight: () => (
               <Button
                 title="Open"
                 onPress={() => {
                   router.push("/modal");
                 }}
               />
-            ), */
+            ),
           }}
-        />
-        <Stack.Screen
-          name="modal"
-          options={{
-            presentation: "modal",
-            /* headerLeft: () => (
-              <Button
-                title="Open"
-                onPress={() => {
-                  router.back();
-                }}
-              />
-            ), */
-          }}
-        />
+        /> */}
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />

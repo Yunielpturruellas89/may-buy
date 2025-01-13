@@ -29,13 +29,10 @@ const WelcomePage = () => {
 
   const onSubmit = async (data: any) => {
     const loginData = { email: data.email, password: data.password };
+    router.replace("/(drawer)/(tabs)/(stack)/home");
     console.log(loginData);
   };
-  const handlePress = () => {
-    //router.replace("/home");
-    console.log("first");
-    //router.replace("/(drawer)/(tabs)/(stack)/home");
-  };
+
   return (
     <ThemedView
       style={{
